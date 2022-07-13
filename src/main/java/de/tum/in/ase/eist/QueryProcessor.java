@@ -24,9 +24,9 @@ public class QueryProcessor {
             return String.valueOf(Integer.parseInt(x) + Integer.parseInt(y));
 
         } else if (query.toLowerCase().contains("which of the following numbers is the largest:")) {
-            String[] numbers = query.substring(query.indexOf("which of the following numbers is the largest:") + 56).split(",");
+            String[] numbers = query.substring(query.indexOf("which of the following numbers is the largest:") + 46).split(",");
             for (String s : numbers) {
-                s.replaceAll("\\s", "");
+                s = s.replaceAll("\\s+", "");
             }
 
             int biggest = -1;
@@ -39,5 +39,11 @@ public class QueryProcessor {
         } else { // TODO extend the programm here
             return "";
         }
+    }
+
+    public static void main(String[] args) {
+        QueryProcessor queryProcessor = new QueryProcessor();
+
+        System.out.println(queryProcessor.process("which of the following numbers is the largest: 10,20"));
     }
 }
