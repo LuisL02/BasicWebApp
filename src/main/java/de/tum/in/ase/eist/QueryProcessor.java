@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public class QueryProcessor {
 
     public String process(String query) {
-		query = query.toLowerCase();
+        query = query.toLowerCase();
         if (query.contains("shakespeare")) {
             return "William Shakespeare (26 April 1564 - 23 April 1616) was an " +
                     "English poet, playwright, and actor, widely regarded as the greatest " +
@@ -23,6 +23,19 @@ public class QueryProcessor {
 
             return String.valueOf(Integer.parseInt(x) + Integer.parseInt(y));
 
+        } else if (query.toLowerCase().contains("which of the following numbers is the largest:")) {
+            String[] numbers = query.substring(query.indexOf("which of the following numbers is the largest:") + 56).split(",");
+            for (String s : numbers) {
+                s.replaceAll("\\s", "");
+            }
+
+            int biggest = -1;
+            for (String s : numbers) {
+                if (Integer.parseInt(s) > biggest) {
+                    biggest = Integer.parseInt(s);
+                }
+            }
+            return String.valueOf(biggest);
         } else { // TODO extend the programm here
             return "";
         }
